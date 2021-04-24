@@ -1,7 +1,5 @@
 import ContactForm from './Components/ContactForm';
 import Filter from './Components/Filter/';
-
-import { useState, useEffect } from 'react';
 import ContactsList from './Components/ContactsList';
 
 function App() {
