@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 console.log(process.env.NODE_ENV);
 const store = configureStore({
   reducer: rootReducer,
-  devTools: process.env.NODE_ENV === 'production' ? false : true,
+  devTools: process.env.NODE_ENV === 'production' && true,
 });
 
 export default store;
