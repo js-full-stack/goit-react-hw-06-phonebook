@@ -1,35 +1,50 @@
-import { combineReducers } from 'redux';
-import types from './phonebook-types';
-import { v4 as uuidv4 } from 'uuid';
+import { addContact, deleteContact, filterContacts } from './phonebook-actions';
+import { combineReducers, createReducer } from '@reduxjs/toolkit';
 
 const initialState = {
   contacts: {
-    items: [
-      {
-        id: uuidv4(),
-        name: '',
-        number: '',
-      },
-    ],
+    items: [],
     filter: '',
   },
 };
 
-const items = (state = initialState.contacts.items, action) => {
-  const { type, payload } = action;
+const items = createReducer(initialState.contacts.items, {
+  [addContact]: (state, { payload }) => [...state, payload],
+  [deleteContact]: (state, { payload }) =>
+    state.filter(({ id }) => id !== payload),
+});
 
-  switch (type) {
-    case types.ADD_CONTACT:
-      return [...state, payload];
-
-    case types.DELETE_CONTACT:
-      return state.filter(({ id }) => id !== payload);
-
-    default:
-      return state;
-  }
-};
+const filter = createReducer(initialState.contacts.filter, {
+  [filterContacts]: (_, { payload }) => payload,
+});
 
 export default combineReducers({
   items,
+  filter,
 });
+
+// *basic
+// const items = (state = initialState.contacts.items, action) => {
+//   const { type, payload } = action;
+
+//   switch (type) {
+//     case types.ADD_CONTACT:
+//       return [...state, payload];
+
+//     case types.DELETE_CONTACT:
+//       return state.filter(({ id }) => id !== payload);
+
+//     default:
+//       return state;
+//   }
+// };
+
+// const filter = (state = initialState.contacts.filter, actions) => {
+//   const { type, payload } = actions;
+//   switch (type) {
+//     case types.FILTER_CONTACTS:
+//       return payload;
+//     default:
+//       return state;
+//   }
+// };
