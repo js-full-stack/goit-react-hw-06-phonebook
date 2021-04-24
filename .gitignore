@@ -10,7 +10,6 @@
 
 # production
 /build
-.process.env.NODE_ENV
 
 # misc
 .DS_Store

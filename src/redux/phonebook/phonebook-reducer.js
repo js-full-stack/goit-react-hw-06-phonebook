@@ -13,7 +13,7 @@ const items = createReducer(initialState.contacts.items, {
   [deleteContact]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });
-
+ 
 const filter = createReducer(initialState.contacts.filter, {
   [filterContacts]: (_, { payload }) => payload,
 });
